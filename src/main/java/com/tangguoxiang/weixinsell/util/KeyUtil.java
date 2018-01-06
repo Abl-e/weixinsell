@@ -1,6 +1,8 @@
 package com.tangguoxiang.weixinsell.util;
 
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 随机数生成
@@ -35,12 +37,19 @@ public class KeyUtil {
     /**
      * 生成唯一主键
      * 格式时间+随机数
-     * @return
+     * @return 生成的主键
      */
-    public static synchronized String genUniqueKey(){
+    public static String genUniqueKey(){
         Random random = new Random();
-        int number = random.nextInt(900000) + 100000;
-
-        return System.currentTimeMillis() + String.valueOf(number);
+        Lock lock = new ReentrantLock();
+        String key;
+        try {
+            lock.lock();
+            int number = random.nextInt(900000) + 100000;
+            key = System.currentTimeMillis() + String.valueOf(number);
+        }finally {
+            lock.unlock();
+        }
+        return key;
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 import static org.junit.Assert.*;
 
@@ -36,11 +38,21 @@ public class ProductInfoRepositoryTest {
         productInfo.setCategoryType(1);
         ProductInfo result = repository.save(productInfo);
         Assert.assertNotNull(result);
+
     }
 
     @Test
     public void findByProductStatus() {
         List<ProductInfo> productInfoList = repository.findByProductStatus(0);
         Assert.assertNotEquals(0,productInfoList.size());
+    }
+
+    @Test
+    public void test(){
+        new Thread(()->{
+            System.out.println("111");
+        }).start();
+
+
     }
 }

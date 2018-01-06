@@ -1,13 +1,10 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.service;
 
-import com.tangguoxiang.weixinsell.common.ResultEnum;
-import lombok.Getter;
+import com.tangguoxiang.weixinsell.dto.OrderDTO;
 
 /**
- * 自定义异常类
- *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2018-01-04 17:46
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,18 +28,7 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public class SellException extends RuntimeException{
-
-    private Integer code;
-
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
-    }
-
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
-    }
+public interface BuyerService {
+    OrderDTO findOrderOne(String openid,String orderId);
+    OrderDTO cancel(String openid,String orderId);
 }

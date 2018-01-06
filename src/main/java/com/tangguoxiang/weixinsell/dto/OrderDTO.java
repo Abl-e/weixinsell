@@ -1,8 +1,8 @@
 package com.tangguoxiang.weixinsell.dto;
 
-import com.tangguoxiang.weixinsell.common.OrderStatusEnum;
-import com.tangguoxiang.weixinsell.common.PayStatusEnum;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.tangguoxiang.weixinsell.dataobject.OrderDetail;
+import com.tangguoxiang.weixinsell.util.serialize.Date2LongSerializer;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -80,12 +80,17 @@ public class OrderDTO {
     /**
      * 创建时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
 
     /**
      * 修改时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime ;
 
+    /**
+     * 订单详情List
+     */
     List<OrderDetail> orderDetailList;
 }

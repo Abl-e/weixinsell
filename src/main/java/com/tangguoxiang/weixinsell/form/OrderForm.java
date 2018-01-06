@@ -1,13 +1,15 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.form;
 
-import com.tangguoxiang.weixinsell.common.ResultEnum;
-import lombok.Getter;
+import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 
 /**
- * 自定义异常类
+ * 订单表单对象
  *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2018-01-04 12:34
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,18 +33,35 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public class SellException extends RuntimeException{
+@Data
+public class OrderForm {
+    /**
+     * 买家姓名
+     */
+    @NotEmpty(message = "姓名必填")
+    private String name;
 
-    private Integer code;
+    /**
+     * 买家电话号
+     */
+    @NotEmpty(message = "手机号必填")
+    private String phone;
 
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
-    }
+    /**
+     * 买家地址
+     */
+    @NotEmpty(message = "地址必填")
+    private String address;
 
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
-    }
+    /**
+     * 买家openid
+     */
+    @NotEmpty(message = "openid必填")
+    private String openid;
+
+    /**
+     * 购物车
+     */
+    @NotEmpty(message = "购物车不能为空")
+    private String items;
 }

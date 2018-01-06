@@ -1,9 +1,12 @@
 package com.tangguoxiang.weixinsell.service.impl;
 
 import com.google.common.collect.Lists;
+import com.tangguoxiang.weixinsell.common.OrderStatusEnum;
+import com.tangguoxiang.weixinsell.common.PayStatusEnum;
 import com.tangguoxiang.weixinsell.dataobject.OrderDetail;
 import com.tangguoxiang.weixinsell.dto.OrderDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,13 +75,22 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() {
+        OrderDTO orderDTO = orderService.findOne("1515033581370894799");
+        OrderDTO cancel = orderService.cancel(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getStatus(),cancel.getOrderStatus());
     }
 
     @Test
     public void finish() {
+        OrderDTO orderDTO = orderService.findOne("1515033581370894799");
+        OrderDTO finish = orderService.finish(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getStatus(),finish.getOrderStatus());
     }
 
     @Test
     public void paid() {
+        OrderDTO orderDTO = orderService.findOne("1515033581370894799");
+        OrderDTO paid = orderService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getStatus(),paid.getPayStatus());
     }
 }

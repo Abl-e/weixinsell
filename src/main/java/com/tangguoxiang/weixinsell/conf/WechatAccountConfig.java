@@ -1,13 +1,15 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.conf;
 
-import com.tangguoxiang.weixinsell.common.ResultEnum;
-import lombok.Getter;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 /**
- * 自定义异常类
+ * 微信公众号相关配置类
  *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2018-01-05 16:33
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,18 +33,15 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public class SellException extends RuntimeException{
+@Data
+@Component
+@ConfigurationProperties(prefix = "wechat")
+@PropertySource("classpath:application.yml")
+public class WechatAccountConfig {
 
-    private Integer code;
+    private String mpAppId;
 
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
-    }
+    private String mpAppSecret;
 
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
-    }
+
 }

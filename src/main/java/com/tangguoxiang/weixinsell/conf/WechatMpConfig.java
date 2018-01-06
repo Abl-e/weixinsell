@@ -1,13 +1,18 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.conf;
 
-import com.tangguoxiang.weixinsell.common.ResultEnum;
-import lombok.Getter;
+import me.chanjar.weixin.mp.api.WxMpConfigStorage;
+import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 /**
- * 自定义异常类
+ * 微信公众号配置
  *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2018-01-05 16:17
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,18 +36,25 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public class SellException extends RuntimeException{
+@Component
+public class WechatMpConfig {
 
-    private Integer code;
+    @Autowired
+    private WechatAccountConfig wechatAccountConfig;
 
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
+    @Bean
+    public WxMpService wxMpService(){
+        WxMpService wxMpService = new WxMpServiceImpl();
+        wxMpService.setWxMpConfigStorage(wxMpConfigStorage());
+        return wxMpService;
     }
 
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
+    @Bean
+    public WxMpConfigStorage wxMpConfigStorage(){
+        WxMpInMemoryConfigStorage wxMpConfigStorage = new WxMpInMemoryConfigStorage();
+        wxMpConfigStorage.setAppId(wechatAccountConfig.getMpAppId());
+        wxMpConfigStorage.setSecret(wechatAccountConfig.getMpAppSecret());
+        return wxMpConfigStorage;
     }
+
 }

@@ -1,13 +1,18 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.util.serialize;
 
-import com.tangguoxiang.weixinsell.common.ResultEnum;
-import lombok.Getter;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+
+import java.io.IOException;
+import java.util.Date;
 
 /**
- * 自定义异常类
+ * 日期转long序列化类
  *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2018-01-04 16:01
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,18 +36,10 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public class SellException extends RuntimeException{
+public class Date2LongSerializer extends JsonSerializer<Date> {
 
-    private Integer code;
-
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
-    }
-
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
+    @Override
+    public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
+        jsonGenerator.writeNumber(date.getTime()/1000);
     }
 }

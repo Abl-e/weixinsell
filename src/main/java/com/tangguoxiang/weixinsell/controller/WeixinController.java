@@ -1,13 +1,14 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.controller;
 
-import com.tangguoxiang.weixinsell.common.ResultEnum;
-import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 自定义异常类
+ * 连接微信端controller
  *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2018-01-05 12:48
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,18 +32,12 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public class SellException extends RuntimeException{
-
-    private Integer code;
-
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
-    }
-
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
+@RestController
+@RequestMapping("/weixin")
+@Slf4j
+public class WeixinController {
+    @RequestMapping("/auth")
+    public void auth(){
+        log.info("进入auth方法");
     }
 }

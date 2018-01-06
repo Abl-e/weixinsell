@@ -58,8 +58,7 @@ public class ResultVO<T> {
     }
 
     private ResultVO(Integer code,String msg,T data){
-        this.setCode(code);
-        this.setMsg(msg);
+        this(code,msg);
         this.setData(data);
     }
 
