@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
- * 微信公众号配置
+ * 微信公众号配置类
  *
  * @author 唐国翔
  * @date 2018-01-05 16:17

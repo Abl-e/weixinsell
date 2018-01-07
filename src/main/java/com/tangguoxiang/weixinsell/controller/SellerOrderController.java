@@ -1,16 +1,23 @@
-package com.tangguoxiang.weixinsell.service;
+package com.tangguoxiang.weixinsell.controller;
 
 import com.tangguoxiang.weixinsell.dto.OrderDTO;
-import org.hibernate.criterion.Order;
+import com.tangguoxiang.weixinsell.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 /**
- * 订单service
+ * 卖家端controller
  *
  * @author 唐国翔
- * @date 2017-12-31 13:43
+ * @date 2018-01-07 15:51
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -34,55 +41,24 @@ import org.springframework.data.domain.Pageable;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-public interface OrderService {
-    /**
-     * 创建订单
-     * @param orderDTO OrderDTO对象
-     * @return OrderDTO
-     */
+@Controller
+@RequestMapping("/seller/order")
+public class SellerOrderController {
 
-    OrderDTO create(OrderDTO orderDTO);
+    @Autowired
+    private OrderService orderService;
 
-    /**
-     * 查询单个订单
-     * @param orderId 订单id
-     * @return OrderDTO
-     */
-    OrderDTO findOne(String orderId);
+    @GetMapping("/list")
+    public ModelAndView list(@RequestParam(value = "page",defaultValue = "1")Integer page,
+                             @RequestParam(value = "size",defaultValue = "10")Integer size,
+                             Map<String,Object> map){
 
-    /**
-     * 查询订单列表
-     * @param buyerOpenid 用户的openid
-     * @param pageable 分页信息
-     * @return Page<OrderDTO>
-     */
-    Page<OrderDTO> findList(String buyerOpenid, Pageable pageable);
+        PageRequest pageRequest = new PageRequest(page - 1,size);
+        Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
+        map.put("orderDTOPage",orderDTOPage);
+        map.put("currentPage",page);
+        map.put("size",size);
+        return new ModelAndView("order/list",map);
+    }
 
-    /**
-     * 取消订单
-     * @param orderDTO OrderDTO 对象
-     * @return OrderDTO
-     */
-    OrderDTO cancel(OrderDTO orderDTO);
-
-    /**
-     * 完结订单
-     * @param orderDTO OrderDTO 对象
-     * @return OrderDTO
-     */
-    OrderDTO finish(OrderDTO orderDTO);
-
-    /**
-     * 支付订单
-     * @param orderDTO OrderDTO 对象
-     * @return OrderDTO
-     */
-    OrderDTO paid(OrderDTO orderDTO);
-
-    /**
-     * 查询订单列表
-     * @param pageable 分页信息
-     * @return Page<OrderDTO>
-     */
-    Page<OrderDTO> findList(Pageable pageable);
 }

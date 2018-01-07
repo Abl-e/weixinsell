@@ -1,7 +1,7 @@
 package com.tangguoxiang.weixinsell.service.impl;
 
-import com.tangguoxiang.weixinsell.common.ProductStatusEnum;
-import com.tangguoxiang.weixinsell.common.ResultEnum;
+import com.tangguoxiang.weixinsell.common.enums.ProductStatusEnum;
+import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
 import com.tangguoxiang.weixinsell.dataobject.ProductInfo;
 import com.tangguoxiang.weixinsell.dto.CartDTO;
 import com.tangguoxiang.weixinsell.exception.SellException;

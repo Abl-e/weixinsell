@@ -1,6 +1,6 @@
 package com.tangguoxiang.weixinsell;
 
-import com.tangguoxiang.weixinsell.common.ResultEnum;
+import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
 import com.tangguoxiang.weixinsell.exception.SellException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

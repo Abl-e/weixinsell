@@ -1,13 +1,15 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.service.impl;
 
-import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
-import lombok.Getter;
+import com.lly835.bestpay.model.PayRequest;
+import com.lly835.bestpay.service.impl.BestPayServiceImpl;
+import com.tangguoxiang.weixinsell.dto.OrderDTO;
+import com.tangguoxiang.weixinsell.service.PayService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * 自定义异常类
- *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2018-01-06 19:30
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,18 +33,15 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public class SellException extends RuntimeException{
+@Service
+public class PayServiceImpl implements PayService {
 
-    private Integer code;
+    @Autowired
+    private BestPayServiceImpl bestPayService;
 
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
-    }
-
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
+    @Override
+    public void create(OrderDTO orderDTO) {
+        PayRequest payRequest = new PayRequest();
+        bestPayService.pay(payRequest);
     }
 }

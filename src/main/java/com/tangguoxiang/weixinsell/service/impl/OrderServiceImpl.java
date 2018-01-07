@@ -1,8 +1,8 @@
 package com.tangguoxiang.weixinsell.service.impl;
 
-import com.tangguoxiang.weixinsell.common.OrderStatusEnum;
-import com.tangguoxiang.weixinsell.common.PayStatusEnum;
-import com.tangguoxiang.weixinsell.common.ResultEnum;
+import com.tangguoxiang.weixinsell.common.enums.OrderStatusEnum;
+import com.tangguoxiang.weixinsell.common.enums.PayStatusEnum;
+import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
 import com.tangguoxiang.weixinsell.converter.OrderMaster2OrderDTOConverter;
 import com.tangguoxiang.weixinsell.dataobject.OrderDetail;
 import com.tangguoxiang.weixinsell.dataobject.OrderMaster;
@@ -219,5 +219,12 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orderDTO;
+    }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+        return new PageImpl<>(orderDTOList,pageable,orderMasterPage.getTotalElements());
     }
 }

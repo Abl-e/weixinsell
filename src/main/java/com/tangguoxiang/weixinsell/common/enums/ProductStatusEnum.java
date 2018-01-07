@@ -1,12 +1,12 @@
-package com.tangguoxiang.weixinsell.common;
+package com.tangguoxiang.weixinsell.common.enums;
 
 import lombok.Getter;
 
 /**
- * 支付状态枚举类
+ * 商品状态枚举
  *
  * @author 唐国翔
- * @date 2017-12-31 12:06
+ * @date 2017-12-30 16:39
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,22 +31,17 @@ import lombok.Getter;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
 @Getter
-public enum PayStatusEnum {
+public enum ProductStatusEnum {
 
-    WAIT(0,"未支付"),
-    SUCCESS(1,"支付成功");
-    /**
-     * 支付状态
-     */
-    private Integer status ;
+    UP(0,"上架"),
+    DOWN(1,"下架");
 
-    /**
-     * 描述
-     */
-    private String desc ;
+    private Integer code;
 
-    PayStatusEnum(Integer status,String desc){
-        this.status = status;
+    private String desc;
+
+    ProductStatusEnum(Integer code,String desc){
+        this.code = code;
         this.desc = desc;
     }
 }

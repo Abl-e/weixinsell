@@ -1,13 +1,12 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.util;
 
-import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
-import lombok.Getter;
+import com.tangguoxiang.weixinsell.common.enums.CodeEnum;
 
 /**
- * 自定义异常类
+ * 枚举工具类
  *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2018-01-07 19:25
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,18 +30,13 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public class SellException extends RuntimeException{
-
-    private Integer code;
-
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
-    }
-
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
+public class EnumUtil {
+    public static<T extends CodeEnum> T getByCode(Integer code, Class<T> enumClass){
+        for (T temp : enumClass.getEnumConstants()) {
+            if(code.equals(temp.getStatus())){
+                return temp;
+            }
+        }
+        return null;
     }
 }

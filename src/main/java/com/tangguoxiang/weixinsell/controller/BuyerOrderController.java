@@ -1,7 +1,7 @@
 package com.tangguoxiang.weixinsell.controller;
 
 import com.google.common.collect.Maps;
-import com.tangguoxiang.weixinsell.common.ResultEnum;
+import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
 import com.tangguoxiang.weixinsell.converter.OrderForm2OrderDTOConvert;
 import com.tangguoxiang.weixinsell.dto.OrderDTO;
 import com.tangguoxiang.weixinsell.exception.SellException;

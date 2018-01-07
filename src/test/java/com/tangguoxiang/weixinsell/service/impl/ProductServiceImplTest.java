@@ -1,6 +1,6 @@
 package com.tangguoxiang.weixinsell.service.impl;
 
-import com.tangguoxiang.weixinsell.common.ProductStatusEnum;
+import com.tangguoxiang.weixinsell.common.enums.ProductStatusEnum;
 import com.tangguoxiang.weixinsell.dataobject.ProductInfo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,8 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by 唐国翔 on 2017/12/30.

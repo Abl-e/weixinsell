@@ -1,6 +1,6 @@
 package com.tangguoxiang.weixinsell;
 
-import com.tangguoxiang.weixinsell.common.ResultEnum;
+import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
 import com.tangguoxiang.weixinsell.exception.SellException;
 import org.junit.Test;
 import org.junit.runner.RunWith;

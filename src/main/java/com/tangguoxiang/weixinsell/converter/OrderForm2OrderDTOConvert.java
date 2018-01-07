@@ -2,7 +2,7 @@ package com.tangguoxiang.weixinsell.converter;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.tangguoxiang.weixinsell.common.ResultEnum;
+import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
 import com.tangguoxiang.weixinsell.dataobject.OrderDetail;
 import com.tangguoxiang.weixinsell.dto.OrderDTO;
 import com.tangguoxiang.weixinsell.exception.SellException;

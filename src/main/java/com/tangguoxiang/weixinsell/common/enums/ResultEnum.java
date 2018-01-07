@@ -1,4 +1,4 @@
-package com.tangguoxiang.weixinsell.common;
+package com.tangguoxiang.weixinsell.common.enums;
 
 import lombok.Getter;
 

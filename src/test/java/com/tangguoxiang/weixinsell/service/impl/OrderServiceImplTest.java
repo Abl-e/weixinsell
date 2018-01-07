@@ -1,8 +1,8 @@
 package com.tangguoxiang.weixinsell.service.impl;
 
 import com.google.common.collect.Lists;
-import com.tangguoxiang.weixinsell.common.OrderStatusEnum;
-import com.tangguoxiang.weixinsell.common.PayStatusEnum;
+import com.tangguoxiang.weixinsell.common.enums.OrderStatusEnum;
+import com.tangguoxiang.weixinsell.common.enums.PayStatusEnum;
 import com.tangguoxiang.weixinsell.dataobject.OrderDetail;
 import com.tangguoxiang.weixinsell.dto.OrderDTO;
 import lombok.extern.slf4j.Slf4j;

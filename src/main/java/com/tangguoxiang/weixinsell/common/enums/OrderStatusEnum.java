@@ -1,13 +1,12 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.common.enums;
 
-import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
 import lombok.Getter;
 
 /**
- * 自定义异常类
+ * 订单状态枚举类
  *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2017-12-31 11:59
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -32,17 +31,23 @@ import lombok.Getter;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
 @Getter
-public class SellException extends RuntimeException{
+public enum OrderStatusEnum implements CodeEnum{
+    NEW(0,"新订单"),
+    FINISHED(1,"完结"),
+    CANCEL(2,"已取消")
+    ;
+    /**
+     * 订单状态
+     */
+    private Integer status ;
 
-    private Integer code;
+    /**
+     * 描述
+     */
+    private String desc ;
 
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
-    }
-
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
+    OrderStatusEnum(Integer status,String desc){
+        this.status = status;
+        this.desc = desc;
     }
 }

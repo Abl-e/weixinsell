@@ -1,13 +1,16 @@
-package com.tangguoxiang.weixinsell.exception;
+package com.tangguoxiang.weixinsell.conf;
 
-import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
-import lombok.Getter;
+import com.lly835.bestpay.config.WxPayH5Config;
+import com.lly835.bestpay.service.impl.BestPayServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 /**
- * 自定义异常类
+ * 微信支付配置类
  *
  * @author 唐国翔
- * @date 2017-12-31 14:18
+ * @date 2018-01-06 19:58
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,18 +34,31 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public class SellException extends RuntimeException{
+@Component
+public class WechatPayConfig {
 
-    private Integer code;
+    @Autowired
+    private WechatAccountConfig wechatAccountConfig;
 
-    public SellException(ResultEnum resultEnum){
-        super(resultEnum.getMsg());
-        this.code = resultEnum.getCode();
+    @Bean
+    public BestPayServiceImpl bestPayService(){
+
+        BestPayServiceImpl bestPayService = new BestPayServiceImpl();
+        bestPayService.setWxPayH5Config(this.wxPayH5Config());
+
+        return bestPayService;
     }
 
-    public SellException(Integer code, String message) {
-        super(message);
-        this.code = code;
+    @Bean
+    public WxPayH5Config wxPayH5Config(){
+        WxPayH5Config wxPayH5Config = new WxPayH5Config();
+        wxPayH5Config.setAppId(wechatAccountConfig.getMpAppId());
+        wxPayH5Config.setAppSecret(wechatAccountConfig.getMpAppSecret());
+        wxPayH5Config.setMchId(wechatAccountConfig.getMchId());
+        wxPayH5Config.setMchKey(wechatAccountConfig.getMchKey());
+        wxPayH5Config.setKeyPath(wechatAccountConfig.getKeyPath());
+
+        return wxPayH5Config;
     }
+
 }

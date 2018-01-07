@@ -8,11 +8,18 @@ spring:
     show-sql: true #显示sql
   jackson:
     default-property-inclusion: non_null #jsckson序列化忽略null
+  freemarker:
+    cache: false #实现热部署
 server:
   context-path: /sell
   port: 8088
 
+
+
 #微信公众号相关配置
 wechat:
-  mpAppId:
-  mpAppSecret:
+  mpAppId: wx9e6052614f95005b
+  mpAppSecret: 32c2dadebea8f5dd3eab7b0ee90fb50e
+  mchId: 1409146202
+  mchKey: c976503d34ca432c6601361f969fd8d85
+  keyPath:

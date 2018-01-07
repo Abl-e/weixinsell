@@ -1,13 +1,13 @@
 package com.tangguoxiang.weixinsell.controller;
 
-import com.tangguoxiang.weixinsell.common.ResultEnum;
+import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
 import com.tangguoxiang.weixinsell.exception.SellException;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,9 +56,7 @@ public class WechatController {
     @GetMapping("authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl) throws UnsupportedEncodingException {
 
-        String url = "http:///sell/wechat/userInfo";
-
-        WxMpService wxMpService = new WxMpServiceImpl();
+        String url = "http://jfynbz.natappfree.cc/sell/wechat/userInfo";
 
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl,"UTF-8"));
 
@@ -71,8 +69,10 @@ public class WechatController {
     public String userInfo(@RequestParam("code")String code,
                          @RequestParam("state")String returnUrl){
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken;
+        WxMpUser wxMpUser;
         try {
             wxMpOAuth2AccessToken =  wxMpService.oauth2getAccessToken(code);
+            wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
         } catch (WxErrorException e) {
             log.error("【微信网页授权】{}",e);
             throw new SellException(ResultEnum.WX_MP_ERROR.getCode(),e.getError().getErrorMsg());
@@ -80,7 +80,9 @@ public class WechatController {
 
         String openId = wxMpOAuth2AccessToken.getOpenId();
 
-        return "redirect:" + returnUrl + "?openId=" + openId;
+        log.info("【获取用户基本信息】：{}",wxMpUser);
+
+        return "redirect:" + returnUrl + "?openid=" + openId;
 
     }
 }
