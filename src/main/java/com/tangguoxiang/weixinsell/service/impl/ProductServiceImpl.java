@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductInfo> findUpAll() {
-        return repository.findByProductStatus(ProductStatusEnum.UP.getCode());
+        return repository.findByProductStatus(ProductStatusEnum.UP.getStatus());
     }
 
     @Override
@@ -101,5 +101,37 @@ public class ProductServiceImpl implements ProductService {
             repository.save(productInfo);
 
         }
+    }
+
+    @Override
+    public ProductInfo onSale(String productId) {
+        //查询商品
+        ProductInfo productInfo = repository.findOne(productId);
+        if(productInfo == null){
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        //判断商品状态
+        if(productInfo.getProductStatus().equals(ProductStatusEnum.UP.getStatus())){
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        //修改商品状态 返回结果
+        productInfo.setProductStatus(ProductStatusEnum.UP.getStatus());
+        return repository.save(productInfo);
+    }
+
+    @Override
+    public ProductInfo offSale(String productId) {
+        //查询商品
+        ProductInfo productInfo = repository.findOne(productId);
+        if(productInfo == null){
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        //判断商品状态
+        if(productInfo.getProductStatus().equals(ProductStatusEnum.DOWN.getStatus())){
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        //修改商品状态 返回结果
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getStatus());
+        return repository.save(productInfo);
     }
 }

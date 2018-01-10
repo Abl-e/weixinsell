@@ -82,6 +82,13 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
+		<!-- 引入devtools的依赖 实现freemarker热部署 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
     </dependencies>
 
 	<build>

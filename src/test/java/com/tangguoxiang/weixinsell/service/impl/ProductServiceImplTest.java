@@ -53,7 +53,7 @@ public class ProductServiceImplTest {
         productInfo.setProductStock(100);
         productInfo.setProductDescription("吃不起的茶叶蛋");
         productInfo.setProductIcon("http://xxx.jpg");
-        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getStatus());
         productInfo.setCategoryType(1);
 
         ProductInfo result = productService.save(productInfo);

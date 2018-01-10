@@ -1,12 +1,10 @@
-package com.tangguoxiang.weixinsell.common.enums;
+package com.tangguoxiang.weixinsell.form;
 
-import lombok.Getter;
+import lombok.Data;
 
 /**
- * 商品状态枚举
- *
  * @author 唐国翔
- * @date 2017-12-30 16:39
+ * @date 2018-01-10 17:48
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -30,18 +28,16 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public enum ProductStatusEnum implements CodeEnum {
+@Data
+public class CategoryForm {
 
-    UP(0,"上架"),
-    DOWN(1,"下架");
-
-    private Integer status;
-
-    private String desc;
-
-    ProductStatusEnum(Integer code,String desc){
-        this.status = code;
-        this.desc = desc;
-    }
+    private Integer categoryId;
+    /**
+     * 类目名称
+     */
+    private String categoryName;
+    /**
+     *
+     */
+    private Integer categoryType;
 }

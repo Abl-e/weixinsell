@@ -1,12 +1,14 @@
-package com.tangguoxiang.weixinsell.common.enums;
+package com.tangguoxiang.weixinsell.form;
 
-import lombok.Getter;
+import lombok.Data;
+
+import java.math.BigDecimal;
 
 /**
- * 商品状态枚举
+ * 封装前段商品参数
  *
  * @author 唐国翔
- * @date 2017-12-30 16:39
+ * @date 2018-01-10 16:03
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -30,18 +32,37 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public enum ProductStatusEnum implements CodeEnum {
+@Data
+public class ProductForm {
+    private String productId;
 
-    UP(0,"上架"),
-    DOWN(1,"下架");
+    /**
+     * 名称
+     */
+    private String productName;
 
-    private Integer status;
+    /**
+     * 单价
+     */
+    private BigDecimal productPrice;
 
-    private String desc;
+    /**
+     * 库存
+     */
+    private Integer productStock;
 
-    ProductStatusEnum(Integer code,String desc){
-        this.status = code;
-        this.desc = desc;
-    }
+    /**
+     * 商品描述
+     */
+    private String productDescription;
+
+    /**
+     * 商品的小图
+     */
+    private  String productIcon;
+
+    /**
+     * 类目编号（关联类目表）
+     */
+    private Integer categoryType;
 }

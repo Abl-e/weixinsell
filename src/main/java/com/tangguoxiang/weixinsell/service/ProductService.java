@@ -37,25 +37,56 @@ import java.util.List;
  **/
 public interface ProductService {
 
+    /**
+     * 查询单个商品
+     * @param productId 商品id
+     * @return ProductInfo对象
+     */
     ProductInfo findOne(String productId);
 
     /**
      * 查询所有上架的商品
-     * @return
+     * @return List<ProductInfo>
      */
     List<ProductInfo> findUpAll();
 
+    /**
+     * 分页查询所有商品
+     * @param pageable 分页信息
+     * @return Page<ProductInfo>
+     */
     Page<ProductInfo> findAll(Pageable pageable);
 
+    /**
+     * 新增商品
+     * @param productInfo productInfo对象
+     * @return productInfo对象
+     */
     ProductInfo save(ProductInfo productInfo);
 
     /**
      * 增加库存
+     * @param cartDTOList
      */
     void increaseStock(List<CartDTO> cartDTOList);
 
     /**
      * 减少库存
+     * @param cartDTOList
      */
     void decreaseStock(List<CartDTO> cartDTOList);
+
+    /**
+     * 商品上架
+     * @param productId 商品id
+     * @return
+     */
+    ProductInfo onSale(String productId);
+
+    /**
+     * 商品下架
+     * @param productId 商品id
+     * @return
+     */
+    ProductInfo offSale(String productId);
 }
