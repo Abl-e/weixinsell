@@ -36,5 +36,7 @@ public class SellerInfoRepositoryTest {
 
     @Test
     public void findByOpenid() {
+        SellerInfo result = repository.findByOpenid("123");
+        Assert.assertNotNull(result);
     }
 }
