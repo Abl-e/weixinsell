@@ -1,12 +1,15 @@
 package com.tangguoxiang.weixinsell.controller;
 
+import com.tangguoxiang.weixinsell.common.RedisConstant;
 import com.tangguoxiang.weixinsell.common.enums.ResultEnum;
 import com.tangguoxiang.weixinsell.dataobject.SellerInfo;
 import com.tangguoxiang.weixinsell.exception.SellException;
 import com.tangguoxiang.weixinsell.service.SellerService;
+import com.tangguoxiang.weixinsell.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 用户验证相关controller
@@ -50,6 +54,8 @@ public class SellerUserController {
 
     @Autowired
     private SellerService sellerService;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @GetMapping("/login")
     public ModelAndView login(@RequestParam("openid") String openid,
@@ -62,6 +68,10 @@ public class SellerUserController {
             return new ModelAndView("common/error",map);
         }
         //设置token至redis
+        String token = KeyUtil.genUniqueKey();
+        Integer expire = RedisConstant.EXPIRE;
+
+        redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX,token),openid,expire, TimeUnit.SECONDS);
         return null;
     }
 }

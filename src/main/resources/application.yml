@@ -8,11 +8,17 @@ spring:
     show-sql: true #显示sql
   jackson:
     default-property-inclusion: non_null #jsckson序列化忽略null
+   #实现热部署
   freemarker:
-    cache: false #实现热部署
+    cache: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
 server:
   context-path: /sell
   port: 8088
+
+
 
 
 
