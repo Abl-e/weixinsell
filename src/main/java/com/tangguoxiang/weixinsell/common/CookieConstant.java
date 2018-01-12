@@ -1,13 +1,10 @@
-package com.tangguoxiang.weixinsell.common.enums;
-
-import lombok.Getter;
-
+package com.tangguoxiang.weixinsell.common;
 
 /**
- * 返回消息枚举类
+ * Cookie常量
  *
  * @author 唐国翔
- * @date 2017-12-31 14:23
+ * @date 2018-01-12 10:36
  * <p>
  * 　　　　　　　　┏┓　　　┏┓+ +
  * 　　　　　　　┏┛┻━━━┛┻┓ + +
@@ -31,41 +28,15 @@ import lombok.Getter;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  **/
-@Getter
-public enum ResultEnum {
-
-    SUCCESS(0,"操作成功"),
-    PARAM_ERROR(1,"参数不正确"),
-    PRODUCT_NOT_EXIST(10,"商品不存在"),
-    PRODUCT_STOCK_ERROR(11,"库存不足"),
-    ORDER_NOT_EXIST(12,"订单不存在"),
-    ORDERDETAIL_NOT_EXIST(13,"订单详情不存在"),
-    ORDER_STATUS_ERROR(14,"订单状态不正确"),
-    ORDER_UPDATE_FAIL(15,"订单更新失败"),
-    ORDER_DETAIL_EMPTY(16,"订单详情为空"),
-    ORDER_PAY_STATUS_ERROR(17,"订单支付状态不正确"),
-    CART_EMPTY(18,"购物车不能为空"),
-    ORDER_OWNER_ERROR(19,"该订单不属于当前用户"),
-    WX_MP_ERROR(20,"微信公众账号错误"),
-    ORDER_CANCEL_SUCCESS(21,"订单取消成功"),
-    ORDER_FINISH_SUCCESS(22,"完结订单成功"),
-    PRODUCT_STATUS_ERROR(23,"商品状态不正确"),
-    USER_NOT_EXIST(24,"登录失败，不存在此用户信息"),
-    LOGOUT_SUCCESS(25,"登出成功");
-
+public interface CookieConstant {
 
     /**
-     * 状态码
+     * 前缀
      */
-    private Integer code ;
+    String  TOKEN = "token";
 
     /**
-     * 描述消息
+     * 过期时间
      */
-    private String msg ;
-
-    ResultEnum(Integer code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
+    Integer EXPIRE = 7200;
 }
